@@ -6,23 +6,23 @@ import { prisma } from "~/server/db/client";
 import type { Adapter } from "@auth/core/adapters";
 
 export const authOpts: SolidAuthConfig = {
-  callbacks: {
-    session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id;
-      }
-      return session;
-    },
-  },
-  adapter: PrismaAdapter(prisma) as Adapter,
-  providers: [
-    // @ts-expect-error Types Issue
-    Discord({
-      clientId: serverEnv.DISCORD_ID,
-      clientSecret: serverEnv.DISCORD_SECRET,
-    }),
-  ],
-  debug: false,
+	callbacks: {
+		session({ session, user }) {
+			if (session.user) {
+				session.user.id = user.id;
+			}
+			return session;
+		},
+	},
+	adapter: PrismaAdapter(prisma) as Adapter,
+	providers: [
+		// @ts-expect-error Types Issue
+		Discord({
+			clientId: serverEnv.DISCORD_ID,
+			clientSecret: serverEnv.DISCORD_SECRET,
+		}),
+	],
+	debug: false,
 };
 
 export const { GET, POST } = SolidAuth(authOpts);
