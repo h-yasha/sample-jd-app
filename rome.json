@@ -9,9 +9,13 @@
 				"useShorthandArrayType": "error",
 				"useSingleCaseStatement": "error"
 			},
-			"nursery": {
-				"useCamelCase": "error"
-			}
+			"nursery": {},
+			"a11y": {},
+			"complexity": {},
+			"correctness": {},
+			"performance": {},
+			"security": {},
+			"suspicious": {}
 		}
 	},
 	"formatter": {

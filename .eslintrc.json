@@ -9,6 +9,8 @@
 		"plugin:@typescript-eslint/recommended"
 	],
 	"rules": {
-		"@typescript-eslint/consistent-type-imports": "warn"
+		"@typescript-eslint/consistent-type-imports": "warn",
+		// conflicting rules with rome
+		"no-var": "off"
 	}
 }
