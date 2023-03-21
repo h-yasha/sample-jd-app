@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { serverEnv } from "~/env/server";
 
 declare global {
-	// eslint-disable-next-line no-var
+	// rome-ignore lint/nursery/noVar: <explanation>
 	var prisma: PrismaClient | undefined;
 }
 
