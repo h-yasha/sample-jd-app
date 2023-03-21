@@ -4,7 +4,7 @@ import { trpc } from "~/utils/trpc";
 import { signOut, signIn } from "@auth/solid-start/client";
 import { createServerData$ } from "solid-start/server";
 import { getSession } from "@auth/solid-start";
-import { authOpts } from "./api/auth/[...solidauth]";
+import { authConfig } from "~/server/auth";
 
 const Home: VoidComponent = () => {
 	const hello = trpc.example.hello.useQuery(() => ({ name: "from tRPC" }));
@@ -73,6 +73,6 @@ const AuthShowcase: VoidComponent = () => {
 
 const createSession = () => {
 	return createServerData$(async (_, event) => {
-		return await getSession(event.request, authOpts);
+		return await getSession(event.request, authConfig);
 	});
 };
