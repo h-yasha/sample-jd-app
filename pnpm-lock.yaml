@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@auth/core': ^0.5.1
   '@auth/solid-start': ^0.1.1
+  '@fontsource/fira-sans': ^4.5.10
   '@next-auth/prisma-adapter': ^1.0.5
   '@prisma/client': ^4.11.0
   '@solidjs/meta': ^0.28.2
@@ -54,6 +55,7 @@ dependencies:
   zod: 3.21.4
 
 devDependencies:
+  '@fontsource/fira-sans': 4.5.10
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@total-typescript/ts-reset': 0.4.2
   '@types/node': 18.15.3
@@ -1422,6 +1424,10 @@ packages:
   /@eslint/js/8.36.0:
     resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@fontsource/fira-sans/4.5.10:
+    resolution: {integrity: sha512-4Edj+GA0LYSqfXOvdTwVGmCShT8Ycd8bKzdfzM302n+I6Hsg6h3gBkBeNgN19PhkcngDznZyHv3EkyrKqvMTGw==}
     dev: true
 
   /@hapi/hoek/9.3.0:
