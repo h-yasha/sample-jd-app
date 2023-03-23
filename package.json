@@ -16,7 +16,7 @@
 		"rome:ci": "rome ci .",
 		"eslint:lint": "eslint \"**/*.{ts,tsx,js,jsx}\"",
 		"eslint:fix": "eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
-		"pre:commit": "eslint \"**/*.{ts,tsx,js,jsx}\" && rome:ci"
+		"pre:commit": "eslint \"**/*.{ts,tsx,js,jsx}\" && pnpm rome:ci"
 	},
 	"dependencies": {
 		"@auth/core": "^0.5.1",
