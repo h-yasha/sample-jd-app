@@ -6,10 +6,17 @@
 		"dev": "solid-start dev --port 3000",
 		"start": "solid-start start --port 3000",
 		"build": "solid-start build",
-		"lint": "eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
 		"push": "prisma db push",
 		"postinstall": "prisma generate",
-		"prepare": "node npm.prepare.cjs"
+		"prepare": "node npm.prepare.cjs",
+		"rome:lint": "rome check .",
+		"rome:lint:fix": "rome check . --apply-suggested",
+		"rome:format": "rome format .",
+		"rome:format:write": "rome format . --write",
+		"rome:ci": "rome ci .",
+		"eslint:lint": "eslint \"**/*.{ts,tsx,js,jsx}\"",
+		"eslint:fix": "eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
+		"pre:commit": "eslint \"**/*.{ts,tsx,js,jsx}\" && rome:ci"
 	},
 	"dependencies": {
 		"@auth/core": "^0.5.1",
