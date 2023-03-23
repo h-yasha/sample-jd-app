@@ -12,5 +12,13 @@
 		"@typescript-eslint/consistent-type-imports": "warn",
 		// conflicting rules with rome
 		"no-var": "off"
-	}
+	},
+	"overrides": [
+		{
+			"files": ["*.cjs", "*.cts"],
+			"rules": {
+				"@typescript-eslint/no-var-requires": "off"
+			}
+		}
+	]
 }
