@@ -8,7 +8,8 @@
 		"build": "solid-start build",
 		"lint": "eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
 		"push": "prisma db push",
-		"postinstall": "prisma generate"
+		"postinstall": "prisma generate",
+		"prepare": "node npm.prepare.cjs"
 	},
 	"dependencies": {
 		"@auth/core": "^0.5.1",
@@ -39,6 +40,7 @@
 		"daisyui": "^2.51.4",
 		"eslint": "^8.36.0",
 		"eslint-plugin-solid": "^0.11.0",
+		"husky": "^8.0.3",
 		"postcss": "^8.4.21",
 		"prettier": "^2.8.5",
 		"prisma": "^4.11.0",
