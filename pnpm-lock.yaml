@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  solid-start@0.2.23:
+    hash: mvqhdlgzkuq2zhny2tnf4sjjfu
+    path: patches/solid-start@0.2.23.patch
+
 specifiers:
   '@auth/core': ^0.5.1
   '@auth/solid-start': ^0.1.1
@@ -50,7 +55,7 @@ dependencies:
   '@trpc/client': 10.18.0_@trpc+server@10.18.0
   '@trpc/server': 10.18.0
   solid-js: 1.6.15
-  solid-start: 0.2.23_iba5tui4eac3egldlo4yjtxeem
+  solid-start: 0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem
   solid-start-trpc: 0.0.16_nclumxup4vvamaixskc4tjj3ou
   solid-trpc: 0.1.0-sssr.7_2hvsn6mew3f4be6o4edvawygye
   undici: 5.21.0
@@ -117,7 +122,7 @@ packages:
     dependencies:
       '@auth/core': 0.5.1
       solid-js: 1.6.15
-      solid-start: 0.2.23_iba5tui4eac3egldlo4yjtxeem
+      solid-start: 0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem
     dev: false
 
   /@babel/code-frame/7.18.6:
@@ -4393,7 +4398,7 @@ packages:
       polka: 1.0.0-next.22
       rollup: 3.20.0
       sirv: 2.0.2
-      solid-start: 0.2.23_iba5tui4eac3egldlo4yjtxeem
+      solid-start: 0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem
       terser: 5.16.6
       undici: 5.21.0
       vite: 4.2.1_@types+node@18.15.5
@@ -4411,7 +4416,7 @@ packages:
       '@trpc/client': 10.18.0_@trpc+server@10.18.0
       '@trpc/server': 10.18.0
       solid-js: 1.6.15
-      solid-start: 0.2.23_iba5tui4eac3egldlo4yjtxeem
+      solid-start: 0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem
     dev: false
 
   /solid-start-vercel/0.2.23_56rdvx36cvogm7gqo4fl2sycqq:
@@ -4427,14 +4432,14 @@ packages:
       fast-glob: 3.2.12
       micromatch: 4.0.5
       rollup: 3.20.0
-      solid-start: 0.2.23_iba5tui4eac3egldlo4yjtxeem
+      solid-start: 0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem
       terser: 5.16.6
       vite: 4.2.1_@types+node@18.15.5
     transitivePeerDependencies:
       - encoding
       - supports-color
 
-  /solid-start/0.2.23_iba5tui4eac3egldlo4yjtxeem:
+  /solid-start/0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem:
     resolution: {integrity: sha512-dKTRFtpjskHFyLq9n6oJxqWHYL7H8w14y4+OgIR+57+lqb1N7289kZLTHrzWxWyzDkIG9V1s2MQtiDfIaBP/MQ==}
     hasBin: true
     peerDependencies:
@@ -4507,6 +4512,7 @@ packages:
       wait-on: 6.0.1_debug@4.3.4
     transitivePeerDependencies:
       - supports-color
+    patched: true
 
   /solid-trpc/0.1.0-sssr.7_2hvsn6mew3f4be6o4edvawygye:
     resolution: {integrity: sha512-N/iqU4iFIVEWKFjOY+5J4e2qbOW9STy/eEID1gEjj6mm0w9xYmQtKu/UsBNf8W6nSCYSBjH/ttU5fGCe/0q2Dw==}
@@ -4521,7 +4527,7 @@ packages:
       '@trpc/client': 10.18.0_@trpc+server@10.18.0
       '@trpc/server': 10.18.0
       solid-js: 1.6.15
-      solid-start: 0.2.23_iba5tui4eac3egldlo4yjtxeem
+      solid-start: 0.2.23_mvqhdlgzkuq2zhny2tnf4sjjfu_iba5tui4eac3egldlo4yjtxeem
     dev: false
 
   /source-map-js/1.0.2:

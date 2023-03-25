@@ -8,10 +8,10 @@
 		"moduleResolution": "node",
 		"jsxImportSource": "solid-js",
 		"jsx": "preserve",
-		"types": ["solid-start/env", "./reset"],
 		"baseUrl": "./",
 		"paths": {
 			"~/*": ["./src/*"]
-		}
+		},
+		"skipLibCheck": true
 	}
 }
