@@ -1,0 +1,4 @@
+{
+	"*.{js,jsx,cjs,mjs,ts,tsx,cts,mjs}": ["rome ci", "eslint"],
+	"*.{md,html,css,json}": "prettier --check"
+}

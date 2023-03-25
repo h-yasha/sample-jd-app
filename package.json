@@ -16,7 +16,7 @@
 		"rome:ci": "rome ci .",
 		"eslint:lint": "eslint \"**/*.{ts,tsx,js,jsx}\"",
 		"eslint:fix": "eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
-		"pre:commit": "eslint \"**/*.{ts,tsx,js,jsx}\" && pnpm rome:ci"
+		"pre:commit": "lint-staged && tsc --noEmit"
 	},
 	"dependencies": {
 		"@auth/core": "^0.5.1",
@@ -48,6 +48,7 @@
 		"eslint": "^8.36.0",
 		"eslint-plugin-solid": "^0.11.0",
 		"husky": "^8.0.3",
+		"lint-staged": "^13.2.0",
 		"postcss": "^8.4.21",
 		"prettier": "^2.8.7",
 		"prisma": "^4.11.0",
