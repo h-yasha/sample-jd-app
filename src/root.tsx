@@ -1,6 +1,8 @@
 // @refresh reload
 import "./root.css";
-import { Suspense } from "solid-js";
+import { cookieStorage } from "@solid-primitives/storage";
+import { Suspense, createEffect, createSignal } from "solid-js";
+import { isServer } from "solid-js/web";
 import {
 	Body,
 	ErrorBoundary,
@@ -13,9 +15,31 @@ import {
 	Scripts,
 	Title,
 } from "solid-start";
+import { useRequest } from "solid-start/server";
 import { queryClient, trpc } from "~/utils/trpc";
 
 export default function Root() {
+	const [cookie, setCookie] = createSignal(
+		(isServer ? useRequest().request.headers.get("cookie") : document.cookie) ??
+			"",
+	);
+
+	cookieStorage._cookies = [
+		{
+			get cookie() {
+				return cookie();
+			},
+			set cookie(cookie) {
+				setCookie(cookie);
+			},
+		},
+		"cookie",
+	];
+
+	createEffect(() => {
+		document.cookie = cookie();
+	});
+
 	return (
 		<Html lang="en">
 			<Head>
