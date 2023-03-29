@@ -46,7 +46,7 @@ export default function Root() {
 	});
 
 	return (
-		<Html lang="en">
+		<Html lang="en" data-theme={cookieStorage.getItem("theme") ?? ""}>
 			<Head>
 				<Title>Create JD App</Title>
 				<Meta charset="utf-8" />
