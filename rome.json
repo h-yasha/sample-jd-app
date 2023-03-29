@@ -2,13 +2,8 @@
 	"$schema": "./node_modules/rome/configuration_schema.json",
 	"files": {
 		"ignore": [
-			"**/dist/**",
-			"**/.solid/**",
-			"**/.output/**",
-			"**/.vercel/**",
-			"**/.netlify/**",
-			"**/netlify/**",
-			"**/node_modules/**"
+			"**/dist/**", "**/.solid/**", "**/.output/**", "**/.vercel/**",
+			"**/.netlify/**", "**/netlify/**", "**/node_modules/**"
 		]
 	},
 	"linter": {
@@ -30,6 +25,9 @@
 		}
 	},
 	"formatter": {
+		"enabled": true
+	},
+	"organizeImports": {
 		"enabled": true
 	}
 }

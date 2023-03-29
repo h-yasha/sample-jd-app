@@ -6,5 +6,6 @@
 **/*.cts
 **/*.mjs
 **/*.mts
+**/*.json
 
 pnpm-lock.yaml
