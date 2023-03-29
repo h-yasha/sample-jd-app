@@ -1,7 +1,7 @@
 // @refresh reload
 import "./root.css";
 import { cookieStorage } from "@solid-primitives/storage";
-import { Suspense, createEffect, createSignal } from "solid-js";
+import { Suspense, createEffect, createSignal, onMount } from "solid-js";
 import { isServer } from "solid-js/web";
 import {
 	Body,
@@ -16,6 +16,7 @@ import {
 	Title,
 } from "solid-start";
 import { useRequest } from "solid-start/server";
+import { themeChange } from "theme-change";
 import { queryClient, trpc } from "~/utils/trpc";
 
 export default function Root() {
@@ -38,6 +39,10 @@ export default function Root() {
 
 	createEffect(() => {
 		document.cookie = cookie();
+	});
+
+	onMount(() => {
+		themeChange();
 	});
 
 	return (
