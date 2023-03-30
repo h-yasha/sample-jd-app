@@ -29,6 +29,7 @@
 		"@solidjs/meta": "^0.28.2",
 		"@solidjs/router": "^0.8.2",
 		"@tanstack/solid-query": "^5.0.0-alpha.2",
+		"@tanstack/solid-table": "^8.8.4",
 		"@trpc/client": "^10.18.0",
 		"@trpc/server": "^10.18.0",
 		"solid-js": "^1.6.16",

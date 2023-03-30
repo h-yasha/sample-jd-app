@@ -1,11 +1,7 @@
 {
 	"recommendations": [
-		"streetsidesoftware.code-spell-checker",
-		"mikestead.dotenv",
-		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode",
-		"prisma.prisma",
-		"rome.rome",
-		"bradlc.vscode-tailwindcss"
+		"streetsidesoftware.code-spell-checker", "mikestead.dotenv",
+		"dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "prisma.prisma",
+		"rome.rome", "bradlc.vscode-tailwindcss"
 	]
 }
