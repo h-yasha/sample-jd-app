@@ -10,8 +10,8 @@ export interface TableProps<T> {
 	data: T[];
 	columns: ColumnDef<T, unknown>[];
 
+	fullWidth?: true;
 	compact?: true;
-	searchAll?: true;
 }
 
 function Table<T>(props: TableProps<T>) {
@@ -27,7 +27,13 @@ function Table<T>(props: TableProps<T>) {
 
 	return (
 		<div class="p-2">
-			<table>
+			<table
+				class="table"
+				classList={{
+					"w-full": props.fullWidth,
+					"table-compact": props.compact,
+				}}
+			>
 				<thead>
 					<For each={table.getHeaderGroups()}>
 						{(headerGroup) => (

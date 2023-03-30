@@ -79,7 +79,7 @@ function TablePage() {
 
 	return (
 		<>
-			<Table data={data()} columns={defaultColumns} />
+			<Table data={data()} columns={defaultColumns} fullWidth compact />
 			<div class="h-4" />
 			<button onClick={() => rerender()} class="border p-2">
 				Rerender
