@@ -10,6 +10,7 @@ const config = {
 	singleQuote: false,
 	quoteProps: "as-needed",
 	trailingComma: "all",
+	plugins: ["prettier-plugin-tailwindcss"],
 };
 
 module.exports = config;

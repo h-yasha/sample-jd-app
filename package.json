@@ -11,12 +11,14 @@
 		"prepare": "node npm.prepare.cjs",
 		"rome:lint": "rome check .",
 		"rome:lint:fix": "rome check . --apply-suggested",
+		"rome:lint:fix:unsafe": "rome check . --apply-unsafe",
 		"rome:format": "rome format .",
 		"rome:format:write": "rome format . --write",
 		"rome:ci": "rome ci .",
 		"eslint:lint": "eslint \"**/*.{ts,tsx,js,jsx}\"",
 		"eslint:fix": "eslint --fix \"**/*.{ts,tsx,js,jsx}\"",
-		"pre:commit": "lint-staged"
+		"pre:commit": "lint-staged",
+		"format": "prettier --write \"**/*.{tsx,jsx}\" && rome format --write ."
 	},
 	"dependencies": {
 		"@auth/core": "^0.5.1",
@@ -53,6 +55,7 @@
 		"lint-staged": "^13.2.0",
 		"postcss": "^8.4.21",
 		"prettier": "^2.8.7",
+		"prettier-plugin-tailwindcss": "^0.2.6",
 		"prisma": "^4.12.0",
 		"rome": "^12.0.0",
 		"solid-start-node": "^0.2.24",

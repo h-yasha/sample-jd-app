@@ -1,10 +1,10 @@
+import { getSession } from "@auth/solid-start";
+import { signIn, signOut } from "@auth/solid-start/client";
 import { Suspense, type VoidComponent } from "solid-js";
 import { A } from "solid-start";
-import { trpc } from "~/utils/trpc";
-import { signOut, signIn } from "@auth/solid-start/client";
 import { createServerData$ } from "solid-start/server";
-import { getSession } from "@auth/solid-start";
 import { authConfig } from "~/server/auth";
+import { trpc } from "~/utils/trpc";
 
 const Home: VoidComponent = () => {
 	const hello = trpc.example.hello.useQuery(() => ({ name: "from tRPC" }));

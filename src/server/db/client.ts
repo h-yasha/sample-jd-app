@@ -2,10 +2,11 @@ import { PrismaClient } from "@prisma/client";
 import { serverEnv } from "~/env/server";
 
 declare global {
-	// rome-ignore lint/nursery/noVar: <explanation>
+	// rome-ignore lint/style/noVar: <explanation>
 	var prisma: PrismaClient | undefined;
 }
 
+// rome-ignore lint/nursery/noRedeclare: <explanation>
 export const prisma =
 	global.prisma ||
 	new PrismaClient({

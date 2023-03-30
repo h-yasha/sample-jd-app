@@ -2,12 +2,12 @@ import ThemeSelect from "~/components/ThemeSelect";
 
 function PlaygroundPage() {
 	return (
-		<div class="flex flex-col bg-base-300 min-h-screen space-y-4 p-4">
+		<div class="flex min-h-screen flex-col space-y-4 bg-base-300 p-4">
 			<h1 class="font-bold">Playground</h1>
 
 			<ThemeSelect />
 
-			<ul class="menu bg-base-100 w-56 p-2 rounded-box">
+			<ul class="menu rounded-box w-56 bg-base-100 p-2">
 				<li>
 					<a href="">Page 1</a>
 				</li>
