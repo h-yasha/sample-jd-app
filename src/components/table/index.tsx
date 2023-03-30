@@ -1,4 +1,5 @@
 import type { ColumnDef } from "@tanstack/solid-table";
+import { getSortedRowModel } from "@tanstack/solid-table";
 import {
 	createSolidTable,
 	flexRender,
@@ -23,6 +24,7 @@ function Table<T>(props: TableProps<T>) {
 			return props.columns;
 		},
 		getCoreRowModel: getCoreRowModel(),
+		getSortedRowModel: getSortedRowModel(),
 	});
 
 	return (
@@ -41,12 +43,25 @@ function Table<T>(props: TableProps<T>) {
 								<For each={headerGroup.headers}>
 									{(header) => (
 										<th>
-											{header.isPlaceholder
-												? null
-												: flexRender(
-														header.column.columnDef.header,
-														header.getContext(),
-												  )}
+											<div class="flex justify-between">
+												{header.isPlaceholder
+													? null
+													: flexRender(
+															header.column.columnDef.header,
+															header.getContext(),
+													  )}
+												{header.column.getCanSort() && (
+													<button
+														type="button"
+														onClick={header.column.getToggleSortingHandler()}
+													>
+														{{
+															asc: "🔼",
+															desc: "🔽",
+														}[header.column.getIsSorted() as string] ?? "↕"}
+													</button>
+												)}
+											</div>
 										</th>
 									)}
 								</For>
