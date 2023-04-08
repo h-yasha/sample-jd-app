@@ -9,10 +9,10 @@ function PlaygroundPage() {
 
 			<ul class="menu rounded-box w-56 bg-base-100 p-2">
 				<li>
-					<a href="table">Table</a>
+					<a href="/_/table">Table</a>
 				</li>
-				<li class="disabled">
-					<a href="">Page 2</a>
+				<li>
+					<a href="/_/pagination">Pagination</a>
 				</li>
 				<li class="disabled">
 					<a href="">Page 3</a>
