@@ -1,11 +1,32 @@
+import Pagination from "../Pagination";
 import type { ColumnDef } from "@tanstack/solid-table";
-import { getSortedRowModel } from "@tanstack/solid-table";
 import {
 	createSolidTable,
 	flexRender,
 	getCoreRowModel,
+	getPaginationRowModel,
+	getSortedRowModel,
 } from "@tanstack/solid-table";
-import { For } from "solid-js";
+import { For, createSignal, onMount } from "solid-js";
+
+function pageSizeGenerator(itemCount: number, numbers = [1, 2, 3, 4, 5]) {
+	const items = new Set<number>();
+
+	const places = itemCount.toString().length;
+
+	for (let i = 1; i < places; i++) {
+		const zeros = "0".repeat(i);
+
+		for (const n of numbers) {
+			const value = parseInt(`${n}${zeros}`);
+			if (value <= itemCount) {
+				items.add(value);
+			}
+		}
+	}
+
+	return Array.from(items);
+}
 
 export interface TableProps<T> {
 	data: T[];
@@ -16,6 +37,19 @@ export interface TableProps<T> {
 }
 
 function Table<T>(props: TableProps<T>) {
+	const [pageIndex, setPageIndex] = createSignal(0);
+	const [pageSize, setPageSize] = createSignal(0);
+
+	const pageCount = () => Math.ceil(props.data.length / pageSize());
+
+	const pageCountOptions = () => pageSizeGenerator(props.data.length);
+
+	onMount(() => {
+		setPageSize(
+			pageCountOptions().findLast((size) => size <= 20) ?? props.data.length,
+		);
+	});
+
 	const table = createSolidTable({
 		get data() {
 			return props.data;
@@ -25,6 +59,15 @@ function Table<T>(props: TableProps<T>) {
 		},
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
+		state: {
+			get pagination() {
+				return {
+					pageIndex: pageIndex(),
+					pageSize: pageSize(),
+				};
+			},
+		},
 	});
 
 	return (
@@ -106,6 +149,34 @@ function Table<T>(props: TableProps<T>) {
 							</tr>
 						)}
 					</For>
+					<tr>
+						<td colspan="100%">
+							<div class="flex items-center">
+								<Pagination
+									count={pageCount()}
+									page={pageIndex()}
+									onChange={(event, page) => setPageIndex(page)}
+								/>
+								<div>
+									<select
+										class="select select-sm"
+										onChange={(event) => {
+											const value = parseInt(event.currentTarget.value);
+											if (!isNaN(value)) {
+												setPageSize(value);
+											}
+										}}
+										value={pageSize()}
+									>
+										<For each={pageCountOptions()}>
+											{(size) => <option value={size}>{size}</option>}
+										</For>
+										<option value={props.data.length}>All</option>
+									</select>
+								</div>
+							</div>
+						</td>
+					</tr>
 				</tfoot>
 			</table>
 		</div>
