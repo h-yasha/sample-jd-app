@@ -223,7 +223,13 @@ function TablePage() {
 
 	return (
 		<>
-			<Table data={data()} columns={defaultColumns} fullWidth compact />
+			<Table
+				data={data()}
+				columns={defaultColumns}
+				fullWidth
+				compact
+				searchAll
+			/>
 			<div class="h-4" />
 			<button onClick={() => rerender()} class="border p-2">
 				Rerender

@@ -4,10 +4,11 @@ import {
 	createSolidTable,
 	flexRender,
 	getCoreRowModel,
+	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
 } from "@tanstack/solid-table";
-import { For, createSignal, onMount } from "solid-js";
+import { For, Show, createSignal, onMount } from "solid-js";
 
 function pageSizeGenerator(itemCount: number, numbers = [1, 2, 3, 4, 5]) {
 	const items = new Set<number>();
@@ -34,11 +35,14 @@ export interface TableProps<T> {
 
 	fullWidth?: true;
 	compact?: true;
+	searchAll?: true;
 }
 
 function Table<T>(props: TableProps<T>) {
 	const [pageIndex, setPageIndex] = createSignal(0);
 	const [pageSize, setPageSize] = createSignal(0);
+
+	const [globalFilter, setGlobalFilter] = createSignal("");
 
 	const pageCount = () => Math.ceil(props.data.length / pageSize());
 
@@ -60,12 +64,16 @@ function Table<T>(props: TableProps<T>) {
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
 		state: {
 			get pagination() {
 				return {
 					pageIndex: pageIndex(),
 					pageSize: pageSize(),
 				};
+			},
+			get globalFilter() {
+				return globalFilter();
 			},
 		},
 	});
@@ -80,6 +88,20 @@ function Table<T>(props: TableProps<T>) {
 				}}
 			>
 				<thead>
+					<Show when={props.searchAll}>
+						<tr>
+							<td class="p-2" colSpan="100%">
+								<input
+									class="w-full px-2 py-1 input input-sm"
+									placeholder="Search all columns..."
+									value={globalFilter()}
+									onChange={(event) =>
+										setGlobalFilter(event.currentTarget.value)
+									}
+								/>
+							</td>
+						</tr>
+					</Show>
 					<For each={table.getHeaderGroups()}>
 						{(headerGroup) => (
 							<tr>
