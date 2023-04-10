@@ -85,7 +85,7 @@ export function Pagination(baseProps: PaginationProps) {
 	const props = mergeProps(
 		{
 			page: 0,
-			count: 1,
+			count: 0,
 			boundaryCount: 2,
 			siblingCount: 2,
 			disabled: false,
@@ -100,7 +100,7 @@ export function Pagination(baseProps: PaginationProps) {
 		baseProps,
 	);
 
-	const startPages = () => range(0, props.boundaryCount);
+	const startPages = () => range(0, Math.min(props.count, props.boundaryCount));
 	const endPages = () =>
 		range(
 			Math.max(props.count - props.boundaryCount, props.boundaryCount),
