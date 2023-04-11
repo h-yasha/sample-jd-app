@@ -1,9 +1,12 @@
 import Pagination from "../Pagination";
+import Filter from "./Filter";
 import type { ColumnDef } from "@tanstack/solid-table";
 import {
 	createSolidTable,
 	flexRender,
 	getCoreRowModel,
+	getFacetedMinMaxValues,
+	getFacetedUniqueValues,
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
@@ -65,6 +68,8 @@ function Table<T>(props: TableProps<T>) {
 		getSortedRowModel: getSortedRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
+		getFacetedUniqueValues: getFacetedUniqueValues(),
+		getFacetedMinMaxValues: getFacetedMinMaxValues(),
 		state: {
 			get pagination() {
 				return {
@@ -127,6 +132,22 @@ function Table<T>(props: TableProps<T>) {
 													</button>
 												)}
 											</div>
+										</th>
+									)}
+								</For>
+							</tr>
+						)}
+					</For>
+					<For each={table.getHeaderGroups()}>
+						{(headerGroup) => (
+							<tr>
+								<For each={headerGroup.headers}>
+									{(header) => (
+										<th>
+											{header.isPlaceholder ||
+											!header.column.getCanFilter() ? null : (
+												<Filter column={header.column} table={table} />
+											)}
 										</th>
 									)}
 								</For>
