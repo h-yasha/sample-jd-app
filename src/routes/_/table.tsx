@@ -1,6 +1,7 @@
 import type { ColumnDef } from "@tanstack/solid-table";
 import { createSignal } from "solid-js";
 import Table from "~/components/table";
+import DateCell from "~/components/table/defaultRenderers/DateCell";
 
 type Person = {
 	firstName: string;
@@ -9,6 +10,7 @@ type Person = {
 	visits: number;
 	status: string;
 	progress: number;
+	date: Date;
 };
 
 const defaultData: Person[] = [
@@ -19,6 +21,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -27,6 +30,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -35,6 +39,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 	{
 		firstName: "tanner",
@@ -43,6 +48,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -51,6 +57,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -59,6 +66,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 	{
 		firstName: "tanner",
@@ -67,6 +75,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -75,6 +84,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -83,6 +93,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 	{
 		firstName: "tanner",
@@ -91,6 +102,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -99,6 +111,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -107,6 +120,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 	{
 		firstName: "tanner",
@@ -115,6 +129,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -123,6 +138,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -131,6 +147,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 	{
 		firstName: "tanner",
@@ -139,6 +156,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -147,6 +165,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -155,6 +174,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 	{
 		firstName: "tanner",
@@ -163,6 +183,7 @@ const defaultData: Person[] = [
 		visits: 100,
 		status: "In Relationship",
 		progress: 50,
+		date: new Date(),
 	},
 	{
 		firstName: "tandy",
@@ -171,6 +192,7 @@ const defaultData: Person[] = [
 		visits: 40,
 		status: "Single",
 		progress: 80,
+		date: new Date("2023-04-01T00:00:00"),
 	},
 	{
 		firstName: "joe",
@@ -179,6 +201,7 @@ const defaultData: Person[] = [
 		visits: 20,
 		status: "Complicated",
 		progress: 10,
+		date: new Date("2023-04-10T00:00:00"),
 	},
 ];
 
@@ -194,6 +217,11 @@ const defaultColumns: ColumnDef<Person>[] = [
 		cell: (info) => <i>{info.getValue<string>()}</i>,
 		header: () => <span>Last Name</span>,
 		footer: (info) => info.column.id,
+	},
+	{
+		accessorKey: "date",
+		header: "Date",
+		cell: DateCell,
 	},
 	{
 		accessorKey: "age",
