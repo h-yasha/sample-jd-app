@@ -15,7 +15,7 @@
 		"editor.defaultFormatter": "rome.rome"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "rome.rome"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"typescript.tsdk": "node_modules/typescript/lib"
 }
