@@ -1,0 +1,4 @@
+{
+	"words": ["luxon"],
+	"ignorePaths": ["**/node_modules"]
+}
