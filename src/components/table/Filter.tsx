@@ -4,6 +4,7 @@ import type {
 	RowData,
 	Table,
 } from "@tanstack/solid-table";
+import { DateTime } from "luxon";
 import { For, Match, Switch } from "solid-js";
 
 interface RangeFilterInputProps<T extends unknown[]> {
@@ -25,28 +26,28 @@ function NumberInput<T extends [number, number]>(
 				min={min()}
 				max={props.columnFilterValue?.[1] ?? max()}
 				value={props.columnFilterValue?.[0] ?? ""}
+				placeholder={`Min${typeof min !== "undefined" ? ` (${min()})` : ""}`}
+				class="w-24 rounded border shadow"
 				onChange={(event) =>
 					props.setFilterValue((old: T | undefined) => [
 						event.currentTarget.value ?? undefined,
 						old?.[1],
 					])
 				}
-				placeholder={`Min${typeof min !== "undefined" ? ` (${min()})` : ""}`}
-				class="w-24 rounded border shadow"
 			/>
 			<input
 				type="number"
 				min={props.columnFilterValue?.[0] ?? min()}
 				max={max()}
 				value={props.columnFilterValue?.[1] ?? ""}
+				placeholder={`Max${typeof max !== "undefined" ? ` (${max()})` : ""}`}
+				class="w-24 rounded border shadow"
 				onChange={(event) =>
 					props.setFilterValue((old: T | undefined) => [
 						old?.[0],
 						event.currentTarget.value ?? undefined,
 					])
 				}
-				placeholder={`Max${typeof max !== "undefined" ? ` (${max()})` : ""}`}
-				class="w-24 rounded border shadow"
 			/>
 		</div>
 	);
@@ -73,12 +74,67 @@ function TextInput(props: TextInputProps) {
 			<input
 				type="text"
 				value={props.columnFilterValue ?? ""}
-				onChange={(event) => props.setFilterValue(event.currentTarget.value)}
 				placeholder={`Search... (${props.columnSize})`}
 				class="w-36 rounded border shadow"
 				list={dataListId()}
+				onChange={(event) => props.setFilterValue(event.currentTarget.value)}
 			/>
 		</>
+	);
+}
+
+function DateInput<T extends [Date, Date]>(props: RangeFilterInputProps<T>) {
+	// const min = () =>
+	// 	props.facetedMinMaxValues()?.[0]
+	// 		? DateTime.fromJSDate(props.facetedMinMaxValues()[0]).toISO({
+	// 				includeOffset: false,
+	// 		  })
+	// 		: "";
+
+	// const max = () =>
+	// 	props.facetedMinMaxValues()?.[1]
+	// 		? DateTime.fromJSDate(props.facetedMinMaxValues()[1]).toISO({
+	// 				includeOffset: false,
+	// 		  })
+	// 		: "";
+
+	return (
+		<div class="flex space-x-2">
+			<input
+				type="datetime-local"
+				value={props.columnFilterValue?.[0].toISOString() ?? ""}
+				class="w-24 rounded border shadow"
+				onChange={(event) => {
+					if (
+						new Date(event.currentTarget.value) !== props.columnFilterValue?.[0]
+					) {
+						props.setFilterValue((old: T | undefined) => [
+							event.currentTarget.value
+								? new Date(event.currentTarget.value)
+								: undefined,
+							old?.[1],
+						]);
+					}
+				}}
+			/>
+			<input
+				type="datetime-local"
+				value={props.columnFilterValue?.[1].toISOString() ?? ""}
+				class="w-24 rounded border shadow"
+				onChange={(event) => {
+					if (
+						new Date(event.currentTarget.value) !== props.columnFilterValue?.[1]
+					) {
+						props.setFilterValue((old: T | undefined) => [
+							old?.[0],
+							event.currentTarget.value
+								? new Date(event.currentTarget.value)
+								: undefined,
+						]);
+					}
+				}}
+			/>
+		</div>
 	);
 }
 
@@ -87,10 +143,16 @@ interface FilterProps<T extends RowData> {
 	table: Table<T>;
 }
 
-type TFieldTypes = "number" | "string" | "boolean" | "bigint";
+type TFieldTypes = "number" | "string" | "boolean" | "bigint" | "date";
 
 const getFieldType = (value: unknown): TFieldTypes => {
-	if (["undefined", "object", "function", "symbol"].includes(typeof value)) {
+	if (value instanceof Date) {
+		return "date";
+	} else if (value instanceof DateTime) {
+		return "date";
+	} else if (
+		["undefined", "object", "function", "symbol"].includes(typeof value)
+	) {
 		console.warn("Unsupported type", value);
 		return "string";
 	} else {
@@ -118,6 +180,15 @@ export function Filter<T extends RowData>(props: FilterProps<T>) {
 							props.column.getFilterValue() as [number, number]
 						}
 						facetedMinMaxValues={props.column.getFacetedMinMaxValues()}
+						setFilterValue={props.column.setFilterValue}
+					/>
+				</Match>
+				<Match when={getFieldType(firstValue()) === "date"}>
+					<DateInput
+						columnFilterValue={props.column.getFilterValue() as [Date, Date]}
+						facetedMinMaxValues={
+							props.column.getFacetedMinMaxValues() as unknown as [Date, Date]
+						}
 						setFilterValue={props.column.setFilterValue}
 					/>
 				</Match>

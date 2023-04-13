@@ -2,6 +2,7 @@ import type { ColumnDef } from "@tanstack/solid-table";
 import { createSignal } from "solid-js";
 import Table from "~/components/table";
 import DateCell from "~/components/table/defaultRenderers/DateCell";
+import { dateFilterFn } from "~/components/table/filters/DateFilter";
 
 type Person = {
 	firstName: string;
@@ -222,6 +223,7 @@ const defaultColumns: ColumnDef<Person>[] = [
 		accessorKey: "date",
 		header: "Date",
 		cell: DateCell,
+		filterFn: dateFilterFn,
 	},
 	{
 		accessorKey: "age",
