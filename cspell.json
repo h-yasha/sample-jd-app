@@ -1,4 +1,6 @@
 {
-	"words": ["luxon"],
+	"words": [
+		"luxon", "tanstack", "trpc", "cmyk", "wireframe", "lofi", "synthwave"
+	],
 	"ignorePaths": ["**/node_modules"]
 }
