@@ -42,8 +42,7 @@ function ThemeSelect(props: JSX.SelectHTMLAttributes<HTMLSelectElement>) {
 		<select
 			{...props}
 			data-choose-theme
-			classList={{ [props.class ?? ""]: !!props.class }}
-			class={"select capitalize"}
+			class={`select capitalize ${props.class ?? ""}`}
 			onChange={(event) => {
 				cookieStorage.setItem("theme", event.currentTarget.value);
 			}}
