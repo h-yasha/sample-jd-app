@@ -11,12 +11,12 @@ const Home: VoidComponent = () => {
 	return (
 		<main>
 			<div class="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-				<h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-					Create <span class="text-[hsl(88, 77%, 78%)]">JD</span> App
+				<h1 class="text-5xl font-extrabold tracking-tight text-primary sm:text-[5rem]">
+					Create <span class="text-primary-focus">JD</span> App
 				</h1>
 				<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
 					<A
-						class="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+						class="flex max-w-xs flex-col gap-4 rounded-xl bg-base-200 p-4 	hover:bg-base-300"
 						href="https://start.solidjs.com"
 						target="_blank"
 					>
@@ -26,7 +26,7 @@ const Home: VoidComponent = () => {
 						</div>
 					</A>
 					<A
-						class="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+						class="flex max-w-xs flex-col gap-4 rounded-xl bg-base-200 p-4 	hover:bg-base-300"
 						href="https://github.com/orjdev/create-jd-app"
 						target="_blank"
 					>
@@ -38,9 +38,7 @@ const Home: VoidComponent = () => {
 					</A>
 				</div>
 				<div class="flex flex-col items-center gap-2">
-					<p class="text-2xl text-white">
-						{hello.data ?? "Loading tRPC query"}
-					</p>
+					<p class="text-2xl">{hello.data ?? "Loading tRPC query"}</p>
 					<Suspense>
 						<AuthShowcase />
 					</Suspense>
@@ -56,11 +54,12 @@ const AuthShowcase: VoidComponent = () => {
 	const sessionData = createSession();
 	return (
 		<div class="flex flex-col items-center justify-center gap-4">
-			<p class="text-center text-2xl text-white">
+			<p class="text-center text-2xl ">
 				{sessionData() && <span>Logged in as {sessionData()?.user?.name}</span>}
 			</p>
 			<button
-				class="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+				type="button"
+				class="rounded-full px-10 py-3 font-semibold  no-underline transition btn"
 				onClick={
 					sessionData() ? () => void signOut() : () => void signIn("discord")
 				}
