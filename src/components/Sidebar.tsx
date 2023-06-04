@@ -35,13 +35,13 @@ const sidebarLinksItems: SidebarLinkItem[] = [
 				name: "category0.item0",
 				label: "Item 0",
 				icon: FaSolidBandage,
-				href: "/",
+				href: "/category0/item0",
 			},
 			{
 				name: "category0.item1",
 				label: "Item 1",
 				icon: FaSolidCircleNotch,
-				href: "/",
+				href: "/category0/item1",
 			},
 		],
 	},
@@ -58,13 +58,13 @@ const sidebarLinksItems: SidebarLinkItem[] = [
 					{
 						name: "category1.subCategory0.subitem0",
 						label: "Item 1",
-						href: "/",
+						href: "/category1/subCategory0/subitem0",
 						icon: FaSolidUserNurse,
 					},
 					{
 						name: "category1.subCategory0.subitem1",
 						label: "Item 2",
-						href: "/",
+						href: "/category1/subCategory0/subitem1",
 						icon: FaSolidUserInjured,
 					},
 				],
@@ -84,13 +84,13 @@ const sidebarLinksItems: SidebarLinkItem[] = [
 					{
 						name: "category1.subCategory0.subitem0",
 						label: "Item 1",
-						href: "/",
+						href: "/category1/subCategory0/subitem0",
 						icon: FaSolidUserNurse,
 					},
 					{
 						name: "category1.subCategory0.subitem1",
 						label: "Item 2",
-						href: "/",
+						href: "/category1/subCategory0/subitem1",
 						icon: FaSolidUserInjured,
 					},
 				],
@@ -100,12 +100,18 @@ const sidebarLinksItems: SidebarLinkItem[] = [
 ];
 
 export const [isOpen, setIsOpen] = createSignal(false);
-export const sidebarWidthREM = () => (isOpen() ? "16rem" : "9rem");
+export function sidebarWidthREM() {
+	if (isOpen()) {
+		return "16rem";
+	}
+
+	return "9rem";
+}
 
 function Sidebar() {
 	return (
 		<div
-			class="z-1 fixed flex max-h-screen min-h-screen w-36 flex-col justify-between bg-base-300 duration-200 ease-in-out "
+			class="z-1 fixed flex max-h-screen min-h-screen flex-col justify-between bg-base-200 duration-200 ease-in-out"
 			style={{ width: sidebarWidthREM() }}
 		>
 			<div class="relative flex flex-col overflow-y-scroll scrollbar-thin scrollbar-thumb-primary scrollbar-thumb-rounded-full hover:scrollbar-thumb-secondary active:scrollbar-thumb-primary-focus">
@@ -117,9 +123,9 @@ function Sidebar() {
 					<p class="font-black text-primary">JD App</p>
 					{isOpen() && "<-"}
 				</div>
-				<ul class="menu p-1">
+				<ul class="menu p-1 gap-1" classList={{ "text-xs": !isOpen() }}>
 					<For each={sidebarLinksItems}>
-						{(link) => <SidebarLink link={link} isOpen={isOpen()} />}
+						{(link) => <SidebarLink link={link} />}
 					</For>
 				</ul>
 			</div>
@@ -132,17 +138,9 @@ function Sidebar() {
 	);
 }
 
-function SidebarLink(props: { link: SidebarLinkItem; isOpen: boolean }) {
+function SidebarLink(props: { link: SidebarLinkItem }) {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const isActive = (name: SidebarLinkItem["name"]) => {
-		const sidebarLink = sidebarLinksItems.find((link) => link.name === name);
-		return (
-			!!sidebarLink &&
-			"href" in sidebarLink &&
-			location.pathname === sidebarLink.href
-		);
-	};
 
 	return (
 		<>
@@ -150,34 +148,55 @@ function SidebarLink(props: { link: SidebarLinkItem; isOpen: boolean }) {
 				{(href) => (
 					// rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 					<li onClick={() => void navigate(href)}>
-						<div class="flex" classList={{ active: isActive(props.link.name) }}>
-							{props.link.icon ? <props.link.icon /> : <div class="w-2" />}
-							<div classList={{ "text-xs": !props.isOpen }}>
-								{props.link.label}
-							</div>
+						<div
+							class="flex items-center gap-2"
+							classList={{ active: href === location.pathname }}
+						>
+							{props.link.icon ? (
+								<props.link.icon fill="currentColor" />
+							) : (
+								<div class="w-2" />
+							)}
+							<div>{props.link.label}</div>
 						</div>
 					</li>
 				)}
 			</Show>
 			<Show when={"children" in props.link && props.link.children} keyed>
 				{(children) => (
-					<>
-						<li class="menu-title">
-							<div class="flex">
-								{props.link.icon ? <props.link.icon /> : <div class="w-2" />}
-								<div classList={{ "text-xs": !props.isOpen }}>
-									{props.link.label}
-								</div>
-							</div>
-						</li>
-						<For each={children}>
-							{(child) => <SidebarLink link={child} isOpen={props.isOpen} />}
-						</For>
-					</>
+					<li>
+						<details open={isActive(props.link, location.pathname)}>
+							<summary class="flex items-center gap-2">
+								{props.link.icon ? (
+									<props.link.icon fill="currentColor" />
+								) : (
+									<div class="w-2" />
+								)}
+								{props.link.label}
+							</summary>
+							<ul>
+								<For each={children}>
+									{(child) => <SidebarLink link={child} />}
+								</For>
+							</ul>
+						</details>
+					</li>
 				)}
 			</Show>
 		</>
 	);
+}
+
+function isActive(linkItem: SidebarLinkItem, pathname: string): boolean {
+	if ("href" in linkItem && linkItem.href === pathname) {
+		return true;
+	}
+
+	if ("children" in linkItem) {
+		return linkItem.children.some((child) => isActive(child, pathname));
+	}
+
+	return false;
 }
 
 export default Sidebar;
